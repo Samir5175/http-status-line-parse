@@ -58,3 +58,10 @@ status-line grammar. The offending input is available as `err.input`.
 ### `StatusLineError`
 
 An `Error` subclass with `name === 'StatusLineError'` and an `input` property.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
